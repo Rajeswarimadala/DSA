@@ -1,0 +1,91 @@
+class Node{
+    Node prev;
+    int data;
+    Node next;
+    Node(int ele){
+        this.data = ele;
+        this.prev = null;
+        this.next = null;
+    }
+}
+class DoublyLinkedList{
+    Node head = null;
+    Node tail = null;
+    void addAtFirst(int ele){
+        Node newnode = new Node(ele);
+        if(head == null){
+            head = newnode;
+            tail = newnode;
+        }
+        else{
+            newnode.next = head;
+            head.prev = newnode;
+            head = newnode;
+        }
+        
+    }
+    void addAtLast(int ele){
+        Node newnode = new Node(ele);
+        if(head == null){
+            head = newnode;
+            tail = newnode;
+        }
+        else{
+            tail.next = newnode;
+            newnode.prev = tail;
+            tail = newnode;
+        }
+        
+    }
+    void deleteAtFirst(){
+        if(head == null){
+            System.out.print("No element found");
+        }
+        else{
+            head = head.next;
+            head.prev = null;
+        }
+        
+    }
+    void deleteAtLast(){
+        if(head == null){
+            System.out.print("No element found");
+        }
+        else{
+            Node curr = head;
+            while(curr.next!=tail){
+                curr = curr.next;
+            }
+            curr.next = null;
+            tail = curr;
+        }
+    }
+    void forwardTraversal(){
+        Node curr = head;
+        while(curr!=null){
+            System.out.print(curr.data+" ");
+            curr = curr.next;
+        }
+    }
+    void backwardTraversal(){
+        Node curr = tail;
+        while(curr!=null){
+            System.out.print(curr.data+" ");
+            curr = curr.prev;
+        }
+    }
+}
+public class Main{
+    public static void main(String[] args){
+        DoublyLinkedList l1 = new DoublyLinkedList();
+        l1.addAtLast(10);
+        l1.addAtLast(20);
+        l1.addAtLast(30);
+        l1.addAtFirst(4);
+        l1.addAtFirst(7);
+        l1.forwardTraversal();
+        System.out.println();
+        l1.backwardTraversal();
+        
+    }
+}
