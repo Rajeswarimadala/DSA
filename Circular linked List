@@ -1,0 +1,76 @@
+class Node{
+    int data;
+    Node next;
+    Node(int ele){
+        this.data = ele;
+        this.next = null;
+    }
+}
+class CircularLinkedList{
+    Node head = null;
+    Node tail = null;
+    void addAtFirst(int ele){
+        Node newnode = new Node(ele);
+        if(head==null){
+            head = newnode;
+            tail = newnode;
+        }else{
+            newnode.next = head; // newnode - head 
+            head = newnode; // declare urself as head.
+        }
+        tail.next = head;
+    }
+    void addAtLast(int ele){
+        Node newnode = new Node(ele);
+        if(head==null){
+            head = newnode;
+            tail = newnode;
+        }else{
+            tail.next = newnode;
+            tail = newnode;
+        }
+        tail.next = head;
+    }
+    void deleteAtFirst(){
+        if(head==null){
+            System.out.print("no element found");
+        }else{
+            head= head.next;
+            tail.next = head;
+        }
+    }
+    void deleteAtEnd(){
+        if(head==null){
+            System.out.print("no element found");
+        }else{
+            Node curr = head;
+            while(curr.next!=tail)
+                curr = curr.next; // last previous node
+            tail = curr; // make last previous as tail 
+            tail.next = head; 
+        }
+    }
+    void display(){
+        Node curr = head;
+        do{
+            System.out.print(curr.data+" ");
+            curr = curr.next; // move to next person
+        }while(curr!=head);
+        
+    }
+}
+public class Main
+{
+	public static void main(String[] args) {
+		CircularLinkedList ll = new CircularLinkedList();
+		ll.addAtLast(100);
+		ll.addAtLast(20);
+		ll.addAtLast(50);
+		ll.addAtFirst(80);
+		ll.addAtFirst(30);
+		ll.display();
+		ll.deleteAtEnd();
+		ll.deleteAtFirst();
+		ll.display();
+	}
+}
